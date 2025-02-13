@@ -1,0 +1,8 @@
+C:/Users/Khoo Zong Zheng/source/repos/TetrisGame/vcpkg_installed/vcpkg/pkgs/raylib_x64-windows/lib/raylib.lib
+C:/Users/Khoo Zong Zheng/source/repos/TetrisGame/vcpkg_installed/vcpkg/pkgs/raylib_x64-windows/bin/raylib.dll
+C:/Users/Khoo Zong Zheng/source/repos/TetrisGame/vcpkg_installed/vcpkg/pkgs/raylib_x64-windows/include/raylib.h
+C:/Users/Khoo Zong Zheng/source/repos/TetrisGame/vcpkg_installed/vcpkg/pkgs/raylib_x64-windows/include/rlgl.h
+C:/Users/Khoo Zong Zheng/source/repos/TetrisGame/vcpkg_installed/vcpkg/pkgs/raylib_x64-windows/include/raymath.h
+C:/Users/Khoo Zong Zheng/source/repos/TetrisGame/vcpkg_installed/vcpkg/pkgs/raylib_x64-windows/lib/pkgconfig/raylib.pc
+C:/Users/Khoo Zong Zheng/source/repos/TetrisGame/vcpkg_installed/vcpkg/pkgs/raylib_x64-windows/lib/cmake/raylib/raylib-config-version.cmake
+C:/Users/Khoo Zong Zheng/source/repos/TetrisGame/vcpkg_installed/vcpkg/pkgs/raylib_x64-windows/lib/cmake/raylib/raylib-config.cmake
