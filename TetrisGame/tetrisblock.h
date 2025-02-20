@@ -25,3 +25,9 @@ private:
 };
 
 TetrisBlock LBlock();
+TetrisBlock JBlock();
+TetrisBlock IBlock();
+TetrisBlock OBlock();
+TetrisBlock TBlock();
+TetrisBlock ZBlock();
+TetrisBlock SBlock();

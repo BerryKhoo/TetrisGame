@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BlockPosition.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Colors.cpp" />
     <ClCompile Include="TetrisBlock.cpp" />

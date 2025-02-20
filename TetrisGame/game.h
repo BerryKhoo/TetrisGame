@@ -1,13 +1,18 @@
 #pragma once
 #include "grid.h"
-#include "tetrisblock.cpp"
+#include "tetrisblock.h"
 
 class Game
 {
 public:
 	Game();
+	TetrisBlock BlockRandom();
+	void Draw();
+	void ControlHandling();
+	vector<TetrisBlock> AllBlocks();
 	tetrisGrid gameGrid;
 private:
-	vector<TetrisBlock> Blocks;
+	vector<TetrisBlock> blocks;
+	TetrisBlock curBlock;
 
 };
