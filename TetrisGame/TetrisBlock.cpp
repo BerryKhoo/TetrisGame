@@ -63,8 +63,7 @@ TetrisBlock IBlock() {
 	return Iblock;
 }
 
-
-
+// Draw the tetris block location in the grid
 void TetrisBlock::Draw(){
 	vector<BlockPosition> filled = GetBlockPosition();
 	for (BlockPosition item : filled)

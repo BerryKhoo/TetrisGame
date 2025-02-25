@@ -3,6 +3,7 @@
 #include <vector>
 #include <random>
 #include "game.h"
+#include "grid.h"
 #include "tetrisblock.h"
 
 using namespace std;
@@ -36,20 +37,48 @@ void Game::Draw() {
 void Game::ControlHandling() {
 
 	int input = GetKeyPressed();
+
 	switch (input) {
 		case KEY_LEFT:
 			curBlock.Movement(0, -1);
+			if (DetectBlock()) {
+				curBlock.Movement(0, 1);
+			}
 			break;
 		case KEY_RIGHT:
 			curBlock.Movement(0, 1);
+			if (DetectBlock()) {
+				curBlock.Movement(0, -1);
+			}
 			break;
 		case KEY_DOWN:
 			curBlock.Movement(1, 0);
+			if (DetectBlock()) {
+				curBlock.Movement(-1, 0);
+			}
 			break;
 		case KEY_UP:
 			curBlock.Movement(-1, 0);
+			if (DetectBlock()) {
+				curBlock.Movement(1, 0);
+			}
 			break;
 	}
-	
+}
 
+bool Game::OutskirtBlock(int row, int col) {
+	if (row >= 0 && row < tetrisGrid().rowNum && col >= 0 && col < tetrisGrid().colNum) {
+		return false;
+	}
+	return true;
+}
+
+bool Game::DetectBlock() {
+	vector<BlockPosition> tiles = curBlock.GetBlockPosition();
+	for (BlockPosition item : tiles) {
+		if (OutskirtBlock(item.row, item.col)) {
+			return true;
+		}
+	}
+	return false;
 }
