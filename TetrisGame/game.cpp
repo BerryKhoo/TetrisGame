@@ -58,11 +58,7 @@ void Game::ControlHandling() {
 			}
 			break;
 		case KEY_UP:
-			curBlock.Movement(-1, 0);
-			if (DetectBlock()) {
-				curBlock.Movement(1, 0);
-			}
-			break;
+			curBlock.RotateClockwise();
 	}
 }
 
