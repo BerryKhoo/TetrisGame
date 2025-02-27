@@ -12,9 +12,9 @@ public:
 	void Draw();
 	int grid[20][10];
 	Colors blockColor{};
-
-private:
 	int rowNum;
 	int colNum;
+
+private:
 	int cellSize;
 };

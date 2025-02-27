@@ -9,6 +9,8 @@ public:
 	TetrisBlock BlockRandom();
 	void Draw();
 	void ControlHandling();
+	bool OutskirtBlock(int row, int col);
+	bool DetectBlock();
 	vector<TetrisBlock> AllBlocks();
 	tetrisGrid gameGrid;
 private:
