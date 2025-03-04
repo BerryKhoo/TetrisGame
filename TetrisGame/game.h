@@ -11,6 +11,7 @@ public:
 	void ControlHandling();
 	bool OutskirtBlock(int row, int col);
 	bool DetectBlock();
+	void AutoDrop();
 	vector<TetrisBlock> AllBlocks();
 	tetrisGrid gameGrid;
 private:

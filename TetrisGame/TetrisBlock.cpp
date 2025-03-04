@@ -90,7 +90,7 @@ void TetrisBlock::Draw(){
 	vector<BlockPosition> filled = GetBlockPosition();
 	for (BlockPosition item : filled)
 	{
-		DrawRectangle(item.col * cellSize + 1, item.row * cellSize + 1, cellSize - 1, cellSize - 1, blockcolor.red);
+		DrawRectangle(item.col * cellSize + 1, item.row * cellSize + 1, cellSize - 1, cellSize - 1, blockcolor.red);		
 	}
 }
 
@@ -105,6 +105,8 @@ vector<BlockPosition> TetrisBlock::GetBlockPosition() {
 		for (int col = 0; col < dimension; ++col) {
 			
 			bool cell = false;
+
+			//Rotation applier
 			switch (currentRotation)
 				{
 				case TetrisBlock::Rotation::UP:
@@ -126,13 +128,20 @@ vector<BlockPosition> TetrisBlock::GetBlockPosition() {
 			if (cell) {
 				movedTiles.push_back(BlockPosition(row + rowOff, col + colOff));
 			}
+
 		}
 	}
+
 	return movedTiles;
 }
 
 void TetrisBlock::RotateClockwise() {
-
 	currentRotation = Rotation((int(currentRotation) + 1) % 4);
+}
 
+void TetrisBlock::RotateAnticlockwise() {
+	currentRotation = Rotation(int(currentRotation) - 1);
+	if (int(currentRotation) == -1) {
+		currentRotation = Rotation(int(currentRotation) + 4);
+	}
 }
