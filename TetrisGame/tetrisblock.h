@@ -23,6 +23,7 @@ public:
 	void Movement(int rows, int column);
 	vector<BlockPosition> GetBlockPosition();
 	void RotateClockwise();
+	void RotateAnticlockwise();
 	void Draw();
 	int blockID;
 	vector<int> matrix; // BlockID and its position with coordinates

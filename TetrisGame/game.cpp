@@ -59,6 +59,9 @@ void Game::ControlHandling() {
 			break;
 		case KEY_UP:
 			curBlock.RotateClockwise();
+			if (DetectBlock()) {
+				curBlock.RotateAnticlockwise();
+			}
 	}
 }
 
@@ -77,4 +80,10 @@ bool Game::DetectBlock() {
 		}
 	}
 	return false;
+}
+void Game::AutoDrop(){
+	curBlock.Movement(1, 0);
+	if (DetectBlock()) {
+		curBlock.Movement(-1, 0);
+	}
 }
