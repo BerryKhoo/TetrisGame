@@ -12,10 +12,13 @@ public:
 	bool OutskirtBlock(int row, int col);
 	bool DetectBlock();
 	void AutoDrop();
+	void LockBlock();
+	bool CheckTiles();
 	vector<TetrisBlock> AllBlocks();
 	tetrisGrid gameGrid;
 private:
 	vector<TetrisBlock> blocks;
 	TetrisBlock curBlock;
+	TetrisBlock nextBlock;
 
 };

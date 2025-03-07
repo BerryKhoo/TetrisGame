@@ -11,6 +11,7 @@ using namespace std;
 Game::Game() {
 	gameGrid = tetrisGrid();
 	curBlock = BlockRandom();
+	nextBlock = BlockRandom();
 	blocks = AllBlocks();
 }
 
@@ -53,13 +54,13 @@ void Game::ControlHandling() {
 			break;
 		case KEY_DOWN:
 			curBlock.Movement(1, 0);
-			if (DetectBlock()) {
+			if (DetectBlock() || CheckTiles() == false) {
 				curBlock.Movement(-1, 0);
 			}
 			break;
 		case KEY_UP:
 			curBlock.RotateClockwise();
-			if (DetectBlock()) {
+			if (DetectBlock() || CheckTiles() == false) {
 				curBlock.RotateAnticlockwise();
 			}
 	}
@@ -83,7 +84,27 @@ bool Game::DetectBlock() {
 }
 void Game::AutoDrop(){
 	curBlock.Movement(1, 0);
-	if (DetectBlock()) {
+	if (DetectBlock() || CheckTiles() == false) {
 		curBlock.Movement(-1, 0);
+		LockBlock();
 	}
+}
+
+void Game::LockBlock() {
+	vector<BlockPosition> tiles = curBlock.GetBlockPosition();
+	for (BlockPosition item : tiles){
+		gameGrid.grid[item.row][item.col] = curBlock.blockID; //Mark the block on the place.
+	}
+	curBlock = nextBlock;
+	nextBlock = BlockRandom();
+}
+
+bool Game::CheckTiles() {
+	vector<BlockPosition> tiles = curBlock.GetBlockPosition();
+	for (BlockPosition item : tiles) {
+		if (gameGrid.emptyCell(item.row, item.col) == false) {
+			return false;
+		}
+	}
+	return true;
 }

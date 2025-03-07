@@ -6,15 +6,16 @@
 using namespace std;
 
 //Specifying own colors
-//vector<Color> getColors();
-struct Colors;
-Colors getColors();
+extern const Color blue;
+extern const Color red;
+extern const Color green;
+extern const Color yellow;
+extern const Color cyan;
+extern const Color orange;
+extern const Color purple;
+extern const Color grey;
+extern const Color black;
+extern const Color white;
 
-struct Colors {
-	Color blue = {35,35,120,128};
-	Color red = {233,28,28,255};
-	Color green = {47,230,23,255};
-	Color grey = {150,150,150,200};
-	Color white = {255,255,255,255};
-	Color black = {0,0,0,255};
-};
+vector<Color> getBlockColor();
+vector<Color> getBgColor();

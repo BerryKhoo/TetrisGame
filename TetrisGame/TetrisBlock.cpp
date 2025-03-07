@@ -4,11 +4,13 @@
 #include "color.h"
 #include "grid.h"
 #include "tetrisblock.h"
+#include "game.h"
 
-Colors blockcolor = getColors();
+
 //Creating tetris Blocks
 TetrisBlock::TetrisBlock(){
 	cellSize = 30;
+	blockColor = getBlockColor();
 	Rotation currentRotation(Rotation::UP);
 }
 
@@ -90,7 +92,8 @@ void TetrisBlock::Draw(){
 	vector<BlockPosition> filled = GetBlockPosition();
 	for (BlockPosition item : filled)
 	{
-		DrawRectangle(item.col * cellSize + 1, item.row * cellSize + 1, cellSize - 1, cellSize - 1, blockcolor.red);		
+
+		DrawRectangle(item.col * cellSize + 1, item.row * cellSize + 1, cellSize - 1, cellSize - 1, blockColor[blockID]);
 	}
 }
 
@@ -106,7 +109,7 @@ vector<BlockPosition> TetrisBlock::GetBlockPosition() {
 			
 			bool cell = false;
 
-			//Rotation applier
+			//Rotation applier, put it into flat array and apply formular while rotating.
 			switch (currentRotation)
 				{
 				case TetrisBlock::Rotation::UP:
@@ -128,7 +131,6 @@ vector<BlockPosition> TetrisBlock::GetBlockPosition() {
 			if (cell) {
 				movedTiles.push_back(BlockPosition(row + rowOff, col + colOff));
 			}
-
 		}
 	}
 

@@ -23,7 +23,7 @@ int main() {
 	InitWindow(300, 600, "Berry Tetris");
 	SetTargetFPS(30);
 	
-	Colors blockColor = getColors();
+	vector<Color> bgColor = getBgColor();
 	Game game = Game();
 	
 	while (!WindowShouldClose()) {
@@ -33,7 +33,7 @@ int main() {
 			game.AutoDrop();
 		}
 		BeginDrawing();       
-		ClearBackground(blockColor.white);
+		ClearBackground(bgColor[1]);
 		game.Draw();
 		EndDrawing();                             
 	}

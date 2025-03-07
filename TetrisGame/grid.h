@@ -11,7 +11,8 @@ public:
 	void printGrid();
 	void Draw();
 	int grid[20][10];
-	Colors blockColor{};
+	vector<Color> blockColor;
+	bool emptyCell(int row, int col);
 	int rowNum;
 	int colNum;
 

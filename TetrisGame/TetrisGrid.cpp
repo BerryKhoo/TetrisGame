@@ -12,7 +12,7 @@ tetrisGrid::tetrisGrid() {
 	colNum = 10;
 	cellSize = 30;
 	initializeGrid();
-	Colors blockColor = getColors();
+	blockColor = getBlockColor();
 }
 
 void tetrisGrid::initializeGrid() {
@@ -37,9 +37,18 @@ void tetrisGrid::printGrid() {
 void tetrisGrid::Draw() {
 	for (int row = 0; row < rowNum; row++) {
 		for (int column = 0; column < colNum; column++) {
-			DrawRectangle(column * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1, blockColor.grey);
+			int cellValue = grid[row][column]; 
+			DrawRectangle(column * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1, blockColor[cellValue]);
 		}
 	}
+}
+
+bool tetrisGrid::emptyCell(int row, int col) {
+	
+	if (grid[row][col] == 0) {
+		return true;
+	}
+	return false;
 }
 
 

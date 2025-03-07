@@ -22,6 +22,7 @@ public:
 	TetrisBlock();
 	void Movement(int rows, int column);
 	vector<BlockPosition> GetBlockPosition();
+	bool CheckTilesRotate();
 	void RotateClockwise();
 	void RotateAnticlockwise();
 	void Draw();
@@ -31,7 +32,7 @@ public:
 private:
 	int cellSize;
 	Rotation currentRotation;
-	Colors blockcolors{};
+	vector<Color> blockColor;
 	int rowOff = 0;
 	int colOff = 0;
 };
