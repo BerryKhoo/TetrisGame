@@ -14,6 +14,10 @@ public:
 	void AutoDrop();
 	void LockBlock();
 	bool CheckTiles();
+	void ClearLines();
+	bool CheckRow(int row);
+	void ClearRow(int row);
+	void MoveRowDown(int row, int clearRow);
 	vector<TetrisBlock> AllBlocks();
 	tetrisGrid gameGrid;
 private:
