@@ -29,12 +29,13 @@ public:
 	int blockID;
 	vector<int> matrix; // BlockID and its position with coordinates
 	int dimension;
+	int rowOff = 0;
+	int colOff = 0;
 private:
 	int cellSize;
 	Rotation currentRotation;
 	vector<Color> blockColor;
-	int rowOff = 0;
-	int colOff = 0;
+	
 };
 
 TetrisBlock LBlock();

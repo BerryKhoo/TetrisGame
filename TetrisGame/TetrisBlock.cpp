@@ -24,6 +24,7 @@ TetrisBlock LBlock() {
 					 1, 1, 1,
 					 0, 0, 0};
 	Lblock.dimension = 3;
+	Lblock.colOff = 3;
 	return Lblock;
 }
 
@@ -34,6 +35,7 @@ TetrisBlock JBlock() {
 					 1, 1, 1,
 					 0, 0, 0};
 	Jblock.dimension = 3;
+	Jblock.colOff = 3;
 	return Jblock;
 }
 
@@ -43,6 +45,7 @@ TetrisBlock OBlock() {
 	Oblock.matrix = {1, 1,
 					 1, 1};
 	Oblock.dimension = 2;
+	Oblock.colOff = 4;
 	return Oblock;
 }
 
@@ -53,6 +56,7 @@ TetrisBlock SBlock() {
 					 1, 1, 0,
 					 0, 0, 0};
 	Sblock.dimension = 3;
+	Sblock.colOff = 3;
 	return Sblock;
 }
 
@@ -63,6 +67,7 @@ TetrisBlock ZBlock() {
 					 0, 1, 1,
 					 0, 0, 0};
 	Zblock.dimension = 3;
+	Zblock.colOff = 3;
 	return Zblock;
 }
 
@@ -73,6 +78,7 @@ TetrisBlock TBlock() {
 					 1, 1, 1,
 					 0, 0, 0};
 	Tblock.dimension = 3;
+	Tblock.colOff = 3;
 	return Tblock;
 }
 
@@ -84,6 +90,7 @@ TetrisBlock IBlock() {
 					 0, 0, 1, 0,
 					 0, 0, 1, 0};
 	Iblock.dimension = 4;
+	Iblock.colOff = 4;
 	return Iblock;
 }
 
