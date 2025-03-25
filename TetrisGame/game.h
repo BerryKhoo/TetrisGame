@@ -20,9 +20,9 @@ public:
 	void MoveRowDown(int row, int clearRow);
 	vector<TetrisBlock> AllBlocks();
 	tetrisGrid gameGrid;
+	bool LockblockFlag;
 private:
 	vector<TetrisBlock> blocks;
 	TetrisBlock curBlock;
 	TetrisBlock nextBlock;
-
 };

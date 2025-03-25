@@ -56,6 +56,7 @@ void Game::ControlHandling() {
 			curBlock.Movement(1, 0);
 			if (DetectBlock() || CheckTiles() == false) {
 				curBlock.Movement(-1, 0);
+				LockBlock();
 			}
 			break;
 		case KEY_UP:
@@ -63,21 +64,32 @@ void Game::ControlHandling() {
 			if (DetectBlock() || CheckTiles() == false) {
 				curBlock.RotateAnticlockwise();
 			}
+			break;
+		case KEY_SPACE:
+			while (CheckTiles()) {
+				curBlock.Movement(1, 0);
+				if (DetectBlock() || CheckTiles() == false) {
+					curBlock.Movement(-1, 0);
+					LockBlock();
+					break;
+				}
+			}
+			break;
 	}
 }
 
 bool Game::OutskirtBlock(int row, int col) {
 	if (row >= 0 && row < tetrisGrid().rowNum && col >= 0 && col < tetrisGrid().colNum) {
-		return false;
+		return false; //Not at outskirt
 	}
-	return true;
+	return true; //Its outside
 }
 
 bool Game::DetectBlock() { //Detect whether it is outside the grid
 	vector<BlockPosition> tiles = curBlock.GetBlockPosition();
 	for (BlockPosition item : tiles) {
-		if (OutskirtBlock(item.row, item.col)) {
-			return true;
+		if (OutskirtBlock(item.row, item.col)) { 
+			return true; //If return true, means at outside
 		}
 	}
 	return false;
@@ -91,6 +103,8 @@ void Game::AutoDrop(){
 }
 
 void Game::LockBlock() {
+
+	LockblockFlag = true; //Not Free
 	vector<BlockPosition> tiles = curBlock.GetBlockPosition();
 	for (BlockPosition item : tiles){
 		gameGrid.grid[item.row][item.col] = curBlock.blockID; //Mark the block on the place.
@@ -98,10 +112,11 @@ void Game::LockBlock() {
 	ClearLines();
 	curBlock = nextBlock;
 	nextBlock = BlockRandom();
+	LockblockFlag = false; //Free
 	
 }
 
-bool Game::CheckTiles() {
+bool Game::CheckTiles() { //Check if the current grid is occupied or not
 	vector<BlockPosition> tiles = curBlock.GetBlockPosition();
 	for (BlockPosition item : tiles) {
 		if (gameGrid.emptyCell(item.row, item.col) == false) { //False = cell occupied

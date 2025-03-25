@@ -4,12 +4,11 @@
 #include "game.h"
 
 using namespace std;
+
 double lastTime = 0;
 
 bool DropdownTirgger() {
 	double timeNow = GetTime();
-	
-
 	//Interval
 	if (timeNow - lastTime > 0.5) {  
 		lastTime = timeNow;
@@ -27,7 +26,7 @@ int main() {
 	Game game = Game();
 	
 	while (!WindowShouldClose()) {
-		
+
 		game.ControlHandling();
 		if (DropdownTirgger()) {
 			game.AutoDrop();

@@ -90,7 +90,7 @@ TetrisBlock IBlock() {
 					 0, 0, 1, 0,
 					 0, 0, 1, 0};
 	Iblock.dimension = 4;
-	Iblock.colOff = 4;
+	Iblock.colOff = 3;
 	return Iblock;
 }
 
