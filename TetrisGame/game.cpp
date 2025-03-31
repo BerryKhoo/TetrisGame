@@ -13,6 +13,7 @@ Game::Game() {
 	curBlock = BlockRandom();
 	nextBlock = BlockRandom();
 	blocks = AllBlocks();
+	gameOver = false;
 }
 
 //Next block
@@ -41,40 +42,70 @@ void Game::ControlHandling() {
 
 	switch (input) {
 		case KEY_LEFT:
-			curBlock.Movement(0, -1);
-			if (DetectBlock() || CheckTiles() == false) {
-				curBlock.Movement(0, 1);
-			}
+			MoveLeft();
 			break;
 		case KEY_RIGHT:
-			curBlock.Movement(0, 1);
-			if (DetectBlock() || CheckTiles() == false) {
-				curBlock.Movement(0, -1);
-			}
+			MoveRight();
 			break;
 		case KEY_DOWN:
+			MoveDown();
+			break;
+		case KEY_UP:
+			ClockwiseRotate();
+			break;
+		case KEY_SPACE: // Hard Drop
+			HardDrop();
+			break;
+	}
+}
+
+void Game::MoveRight() {
+	if (!gameOver) {
+		curBlock.Movement(0, 1);
+		if (DetectBlock() || CheckTiles() == false) {
+			curBlock.Movement(0, -1);
+		}
+	}
+}
+
+void Game::MoveLeft() {
+	if (!gameOver) {
+		curBlock.Movement(0, -1);
+		if (DetectBlock() || CheckTiles() == false) {
+			curBlock.Movement(0, 1);
+		}
+	}
+}
+
+void Game::MoveDown() {
+	if (!gameOver) {
+		curBlock.Movement(1, 0);
+		if (DetectBlock() || CheckTiles() == false) {
+			curBlock.Movement(-1, 0);
+			LockBlock();
+		}
+	}
+}
+
+void Game::HardDrop() {
+	if (!gameOver) {
+		while (CheckTiles()) {
 			curBlock.Movement(1, 0);
 			if (DetectBlock() || CheckTiles() == false) {
 				curBlock.Movement(-1, 0);
 				LockBlock();
+				break;
 			}
-			break;
-		case KEY_UP:
-			curBlock.RotateClockwise();
-			if (DetectBlock() || CheckTiles() == false) {
-				curBlock.RotateAnticlockwise();
-			}
-			break;
-		case KEY_SPACE:
-			while (CheckTiles()) {
-				curBlock.Movement(1, 0);
-				if (DetectBlock() || CheckTiles() == false) {
-					curBlock.Movement(-1, 0);
-					LockBlock();
-					break;
-				}
-			}
-			break;
+		}
+	}
+}
+
+void Game::ClockwiseRotate() {
+	if (!gameOver) {
+		curBlock.RotateClockwise();
+		if (DetectBlock() || CheckTiles() == false) {
+			curBlock.RotateAnticlockwise();
+		}		
 	}
 }
 
@@ -95,10 +126,12 @@ bool Game::DetectBlock() { //Detect whether it is outside the grid
 	return false;
 }
 void Game::AutoDrop(){
-	curBlock.Movement(1, 0);
-	if (DetectBlock() || CheckTiles() == false) {
-		curBlock.Movement(-1, 0);
-		LockBlock();
+	if (!gameOver) {
+		curBlock.Movement(1, 0);
+		if (DetectBlock() || CheckTiles() == false) {
+			curBlock.Movement(-1, 0);
+			LockBlock();
+		}
 	}
 }
 
@@ -111,6 +144,9 @@ void Game::LockBlock() {
 	}
 	ClearLines();
 	curBlock = nextBlock;
+	if (CheckTiles() == false) {
+		gameOver = true;
+	}
 	nextBlock = BlockRandom();
 	LockblockFlag = false; //Free
 	
@@ -123,7 +159,7 @@ bool Game::CheckTiles() { //Check if the current grid is occupied or not
 			return false;
 		}
 	}
-	return true;
+	return true; //Not occupied
 }
 
 void Game::ClearLines() {

@@ -19,9 +19,10 @@ bool DropdownTirgger() {
 
 int main() {
 
-	InitWindow(300, 600, "Berry Tetris");
+	InitWindow(800, 700, "Berry Tetris");
 	SetTargetFPS(30);
 	
+	Font score = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
 	vector<Color> bgColor = getBgColor();
 	Game game = Game();
 	
@@ -33,6 +34,7 @@ int main() {
 		}
 		BeginDrawing();       
 		ClearBackground(bgColor[1]);
+		DrawTextEx(score, "Score", {525, 60}, 40, 2, white);
 		game.Draw();
 		EndDrawing();                             
 	}
