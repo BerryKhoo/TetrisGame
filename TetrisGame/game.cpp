@@ -14,6 +14,7 @@ Game::Game() {
 	nextBlock = BlockRandom();
 	blocks = AllBlocks();
 	gameOver = false;
+	score = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
 }
 
 //Next block
@@ -34,8 +35,15 @@ vector<TetrisBlock> Game::AllBlocks(){
 void Game::Draw() {
 	gameGrid.Draw();
 	curBlock.Draw();
+	UI();
 }
 
+void Game::UI() {
+	DrawTextEx(score, "Score", { 535, 80 }, 40, 2, white);
+	DrawRectangleRounded({ 505,140,170,60 }, 0.3, 6, blue);
+	DrawTextEx(score, "Next Block", { 495, 280 }, 40, 2, white);
+	DrawRectangleRounded({ 475,350,240,240 }, 0.3, 6, blue);
+}
 void Game::ControlHandling() {
 
 	int input = GetKeyPressed();

@@ -100,7 +100,7 @@ void TetrisBlock::Draw(){
 	for (BlockPosition item : filled)
 	{
 
-		DrawRectangle(item.col * cellSize + 50, item.row * cellSize + 50, cellSize - 1, cellSize - 1, blockColor[blockID]);
+		DrawRectangle(item.col * cellSize + 70, item.row * cellSize + 50, cellSize - 1, cellSize - 1, blockColor[blockID]);
 	}
 }
 

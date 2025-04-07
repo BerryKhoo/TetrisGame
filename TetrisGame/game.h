@@ -8,6 +8,7 @@ public:
 	Game();
 	TetrisBlock BlockRandom();
 	void Draw();
+	void UI();
 	void ControlHandling();
 	bool OutskirtBlock(int row, int col);
 	bool DetectBlock();
@@ -31,4 +32,5 @@ private:
 	vector<TetrisBlock> blocks;
 	TetrisBlock curBlock;
 	TetrisBlock nextBlock;
+	Font score;
 };
