@@ -15,10 +15,11 @@ public:
 	void AutoDrop();
 	void LockBlock();
 	bool CheckTiles();
-	void ClearLines();
+	int ClearLines();
 	bool CheckRow(int row);
 	void ClearRow(int row);
 	void MoveRowDown(int row, int clearRow);
+	int Points(int clearRow);
 	void MoveRight();
 	void MoveLeft();
 	void MoveDown();
@@ -33,4 +34,5 @@ private:
 	TetrisBlock curBlock;
 	TetrisBlock nextBlock;
 	Font score;
+	int currentScore;
 };

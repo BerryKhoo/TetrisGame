@@ -25,14 +25,14 @@ public:
 	bool CheckTilesRotate();
 	void RotateClockwise();
 	void RotateAnticlockwise();
-	void Draw();
+	void Draw(int col, int row, int cellsize);
 	int blockID;
 	vector<int> matrix; // BlockID and its position with coordinates
 	int dimension;
 	int rowOff = 0;
 	int colOff = 0;
-private:
 	int cellSize;
+private:
 	Rotation currentRotation;
 	vector<Color> blockColor;
 	

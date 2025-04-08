@@ -1,7 +1,9 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <raylib.h>
 #include <vector>
 #include <random>
+#include <string>
 #include "game.h"
 #include "grid.h"
 #include "tetrisblock.h"
@@ -14,7 +16,8 @@ Game::Game() {
 	nextBlock = BlockRandom();
 	blocks = AllBlocks();
 	gameOver = false;
-	score = LoadFontEx("Font/monogram.ttf", 64, 0, 0);
+	score = LoadFontEx("Font/victor-pixel.ttf", 64, 0, 0);
+	currentScore = 0;
 }
 
 //Next block
@@ -33,17 +36,36 @@ vector<TetrisBlock> Game::AllBlocks(){
 }
 
 void Game::Draw() {
-	gameGrid.Draw();
-	curBlock.Draw();
 	UI();
+	gameGrid.Draw();
+	curBlock.Draw(70, 50, curBlock.cellSize);
 }
 
 void Game::UI() {
 	DrawTextEx(score, "Score", { 535, 80 }, 40, 2, white);
-	DrawRectangleRounded({ 505,140,170,60 }, 0.3, 6, blue);
+	DrawRectangleRounded({ 495,140,190,60 }, 0.3, 6, blue);
 	DrawTextEx(score, "Next Block", { 495, 280 }, 40, 2, white);
 	DrawRectangleRounded({ 475,350,240,240 }, 0.3, 6, blue);
+
+	char scoreText[10];
+	sprintf(scoreText, "%d", currentScore);
+	Vector2 textSize = MeasureTextEx(score, scoreText, 45, 2);
+
+	//Center the score by dividing the score size by half with the container size (which is the blank space for the left and right
+	DrawTextEx(score, scoreText, {495 + (170 - textSize.x)/2 , 150}, 45, 2, white);
+	switch (nextBlock.blockID) {
+	case 3:
+		nextBlock.Draw(400, 425, 40);
+		break;
+	case 7:
+		nextBlock.Draw(380, 395, 40);
+		break;
+	default:
+		nextBlock.Draw(420, 415, 40);
+		break;
+	}
 }
+
 void Game::ControlHandling() {
 
 	int input = GetKeyPressed();
@@ -150,7 +172,8 @@ void Game::LockBlock() {
 	for (BlockPosition item : tiles){
 		gameGrid.grid[item.row][item.col] = curBlock.blockID; //Mark the block on the place.
 	}
-	ClearLines();
+	int lines = ClearLines(); //Clear Lines, and calculate how many lines cleared
+	Points(lines);
 	curBlock = nextBlock;
 	if (CheckTiles() == false) {
 		gameOver = true;
@@ -170,7 +193,7 @@ bool Game::CheckTiles() { //Check if the current grid is occupied or not
 	return true; //Not occupied
 }
 
-void Game::ClearLines() {
+int Game::ClearLines() {
 
 	//Check the rows
 	//If rows is full, trigger clear lines, make the row for all grid cell becomes 0
@@ -186,7 +209,7 @@ void Game::ClearLines() {
 			MoveRowDown(row, clearRow);
 		}
 	}
-
+	return clearRow;
 }
 
 bool Game::CheckRow(int row) {
@@ -217,4 +240,25 @@ void Game::MoveRowDown(int row, int clearRow) {
 		gameGrid.grid[row + clearRow][col] = gameGrid.grid[row][col]; //Move the row down, if row 18 is cleared (1 row is cleared), then the 19th row (18+1) will be replaced by the 18th row.
 		gameGrid.grid[row][col] = 0;// Row 18 will fill with all 0.
 	}
+}
+
+int Game::Points(int clearRow) {
+
+	switch (clearRow) {
+		case 1:
+			currentScore += 100;
+			break;
+		case 2:
+			currentScore += 300;
+			break;
+		case 3:
+			currentScore += 1000;
+			break;
+		case 4:
+			currentScore += 4000;
+			break;
+		default:
+			break;
+	}
+	return currentScore;
 }

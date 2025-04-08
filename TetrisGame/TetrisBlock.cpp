@@ -95,12 +95,11 @@ TetrisBlock IBlock() {
 }
 
 // Draw the tetris block location in the grid
-void TetrisBlock::Draw(){
+void TetrisBlock::Draw(int col, int row, int cellsize){
 	vector<BlockPosition> filled = GetBlockPosition();
 	for (BlockPosition item : filled)
 	{
-
-		DrawRectangle(item.col * cellSize + 70, item.row * cellSize + 50, cellSize - 1, cellSize - 1, blockColor[blockID]);
+		DrawRectangle(item.col * cellsize + col, item.row * cellsize + row, cellsize - 1, cellsize - 1, blockColor[blockID]);
 	}
 }
 
